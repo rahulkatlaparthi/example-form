@@ -6,9 +6,11 @@ import loginuser as log
 import register as reg
 import viewbook as vi
 import viewbookid as ki
+import renewal as renew
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'our very hard to guess secretfir'
-app.secret_key="abc"
+app.secret_key = "abc"
 
 
 #
@@ -21,25 +23,39 @@ app.secret_key="abc"
 def thank():
     return render_template('thank.html')
 
-@app.route('/bookdetails')
-def bookdetails():
-    if request.method == 'GET':
-             id = request.args.get('id', None)
-             if(id!=""):
-               r=ki.viewUserBookId(id)
-               print(r)
-               return render_template('bookdetails.html',data=json.loads(r.text))
 
-             else:
-                 return render_template('thank.html')
+@app.route('/bookdetails', methods=['GET', 'POST'])
+def bookdetails():
+    print(request.method)
+    id = request.args.get('id', None)
+    print(id)
+    if request.method == 'GET':
+        if (id != ""):
+            r = ki.viewUserBookId(id)
+            print(r)
+            return render_template('bookdetails.html', data=json.loads(r.text))
+        else:
+            return render_template('thank.html',msg="No record found")
+    if request.method == 'POST':
+
+        if request.form['Renewal_Book'] == "Renewal Book":
+            s=session['idcard_number']
+            res = renew.renewalbook(s, id)
+            return redirect(url_for('home'))
+
+        else:
+            st = "Return_Book"
+            print(st)
+        return render_template('thank.html', msg=st)
+
 
 # Simple form handling using raw HTML forms
 @app.route('/', methods=['GET', 'POST'])
 def login():
     error = ""
     form = RegistrationForm(request.form)
-    if('idcard_number'  in session and 'password' in session):
-        return redirect(url_for('home',))
+    if ('idcard_number' in session and 'password' in session):
+        return redirect(url_for('home', ))
     if request.method == 'POST':
         # Form being submitted; grab data from form.
         idcard_number = request.form['idcard_number']
@@ -94,7 +110,6 @@ def register():
         last_name = form.last_name.data
         email = form.email.data
         password = form.password.data
-        session["password"]=form.password.data
         confirm_password = form.confirm_password.data
 
         if password != confirm_password:
@@ -110,19 +125,15 @@ def register():
     return render_template('register.html', form=form, message=error)
 
 
-def fetchBooks(error,user_id_card_number):
+def fetchBooks(error, user_id_card_number):
     r = vi.viewUserBook(user_id_card_number)
     return render_template('view.html', data=json.loads(r.text), message=error)
-# @app.route('/viewbookid',methods=['GET','POST'])
-# def viewbookid(id):
-#     # r=ki.viewUserBookId()
-
 
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     if request.method == "GET":
-        return fetchBooks("",session['idcard_number'])
+        return fetchBooks("", session['idcard_number'])
     if request.method == "POST":
         print(request.form['buttonAdddClick'])
         user_id_card_number = request.form['user_id_card_number']
@@ -135,7 +146,11 @@ def home():
             error = jsonResponse['message']
         else:
             return redirect(url_for('home'))
-    return fetchBooks(error,session['idcard_number'])
+    return fetchBooks(error, session['idcard_number'])
+
+
+# @app.route("/renewal", methods=['POST'])
+# def renewable():
 
 
 # Run the application
