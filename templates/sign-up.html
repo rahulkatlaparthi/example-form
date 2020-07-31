@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+<head>
+   <link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+{% block title %}Raw Form Example{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        <p>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="text">
+        </p>
+        <p>
+            <label for="last">Password</label>
+            <input id="last" name="password" type="text">
+        </p>
+        <input type="submit" value="Sign Me Up">
+    </form>
+{% endblock %}

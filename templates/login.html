@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Login Form{% endblock %}
+<h1>Login form</h1>
+
+{% block content %}
+<form method="POST">
+    {{ form.csrf_token }}
+    <div class="card"
+         id="rcorners2">
+        <!--  <img src="img_avatar.png" alt="Avatar" style="width:100%">-->
+
+        <h2 style="text-align:center;">My Library</h2>
+        <!--    <p>-->
+        <!--        {{ form.idcard_number.label }}{{ form.idcard_number(size=20) }}-->
+        <!--    </p>-->
+
+        <!--        {{ form.password.label }}{{ form.password(size=20) }}-->
+        <!--    </p>-->
+        <!--    <input type="submit" value="Login">-->
+        <input class="w3-input w3-border w3-round-large" type="text" placeholder="Enter id number" name="idcard_number"
+               autocomplete="off" value="{{
+          request.form.idcard_number }}">
+        <br>
+        <input class="w3-input w3-border w3-round-large" type="password" placeholder="Enter your password"
+               name="password" value="{{
+          request.form.password }}">
+        <br>
+        <input class="btn" type="submit" value="SIGN IN">
+        <p>Don't have an account yet ?</p>
+        <a href="/register" style="Color: #1A545C">Create an account</a>
+    </div>
+
+</form>
+{% endblock %}
+{% block end %}
+
+<ul>
+    <li><a href="/register">Don't have account ?</a></li>
+</ul>
+{% endblock %}

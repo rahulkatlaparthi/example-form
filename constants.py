@@ -1,0 +1,6 @@
+Baseurl = 'http://127.0.0.1:1234/'
+methodRegurl = 'registeruser'
+methodLoginurl = 'logincheck'
+methodAddBookurl = 'addbook'
+methodViewBookidurl = 'viewbookid/'
+methodViewBookurl = 'viewbook/'

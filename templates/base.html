@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Title{% endblock %}</title>
+</head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+body {
+  background-color: #FFBA32;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  margin: auto;
+  padding: 2px 16px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+div {
+  background-color: #FFFFFF;
+}
+.btn:hover {
+  background-color: white ;
+  color: #1A545C;
+  border-radius: 10px;
+}
+.btn{
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  color: white;
+  border-radius: 10px;
+  margin: auto;
+  padding: 2px 16px;
+  background-color: #1A545C
+}
+a {text-align: center;}
+#rcorners2 {
+  border-radius: 8px;
+  padding: 2px 16px;
+  width: 50%;
+  height: 50%;
+}
+
+
+
+
+</style>
+<body>
+
+{% block content %}
+{% endblock %}
+{% if message %}
+<p>Note: {{ message }}</p>
+{% endif %}
+</body>
+</html>

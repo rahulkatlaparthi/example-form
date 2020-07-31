@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %} Registration Form{% endblock %}
+<h1>Registration form</h1>
+
+{% block content %}
+    <form method="POST">
+    {{ form.csrf_token }}
+    <h1>Registration form</h1>
+<!--    <p>-->
+<!--        {{ form.idcard_number.label }}{{ form.idcard_number(size=20) }}-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        {{ form.first_name.label }}{{ form.first_name(size=20) }}-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        {{ form.last_name.label }}{{ form.last_name(size=20) }}-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        {{ form.email.label }}{{ form.email(size=20) }}-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        {{ form.password.label }}{{ form.password(size=20) }}-->
+<!--    </p>-->
+<!--     <p>-->
+<!--        {{ form.confirm_password.label }}{{ form.confirm_password(size=20) }}-->
+<!--    </p>-->
+<!--    <input type="submit" value="Register">-->
+         <div class="card"
+         id="rcorners2">
+        <!--  <img src="img_avatar.png" alt="Avatar" style="width:100%">-->
+
+        <h2 style="text-align:center;">My Library</h2>
+        <!--    <p>-->
+        <!--        {{ form.idcard_number.label }}{{ form.idcard_number(size=20) }}-->
+        <!--    </p>-->
+
+        <!--        {{ form.password.label }}{{ form.password(size=20) }}-->
+        <!--    </p>-->
+        <!--    <input type="submit" value="Login">-->
+        <input class="w3-input w3-border w3-round-large" type="text" placeholder="Enter id number" name="idcard_number"
+               autocomplete="off" value="{{
+          request.form.idcard_number }}">
+        <br>
+         <input class="w3-input w3-border w3-round-large" type="text" placeholder="Enter First name" name="first_name"
+               autocomplete="off" value="{{
+          request.form.first_name }}">
+        <br>
+          <input class="w3-input w3-border w3-round-large" type="text" placeholder="Enter last name" name="last_name"
+               autocomplete="off" value="{{
+          request.form.last_name }}">
+        <br>
+         <input class="w3-input w3-border w3-round-large" type="text" placeholder="Enter email" name="email"
+               autocomplete="off" value="{{
+          request.form.email }}">
+        <br>
+          <input class="w3-input w3-border w3-round-large" type="password" placeholder="Enter your password" name="password"
+               autocomplete="off" value="{{
+          request.form.password }}">
+        <br>
+        <input class="w3-input w3-border w3-round-large" type="password" placeholder="Confirm your  password"
+               name="confirm_password" value="{{
+          request.form.confirm_password }}">
+        <br>
+        <input class="btn" type="submit" value="SIGN UP">
+
+    </div>
+
+    </form>
+{% endblock %}
